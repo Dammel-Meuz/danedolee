@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
-use Illuminate\Support\Facades\Route;
+//use App\Http\Controllers\ProfilesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+//Route::get('/', function () {
+  //  return view('home');
+//});
+Route::get('/', [dashboardController::class, 'home'])->name('job.home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -29,20 +31,30 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::post('creerjob', [dashboardController::class, 'creejob'])->name('job.creat');
+    
 });
 
 //Ouvrier
 
 Route::prefix('ouvrier')->name('ouvrier.')->group(function () {
     Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::get('profile', [RegisterController::class, 'profile'])->name('profiles.store');
+
+   // Route::post('ouvier/profile', [RegisterController::class, 'profile'])->name('ouvrier.info');
+    //Route::post('/profiles', [ProfilesController::class, 'store'])->name('profiles.store');
+
     Route::post('login', [LoginController::class, 'login']);
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+    //Route::post('ouvier/profile', [RegisterController::class, 'profile'])->name('ouvrier.info');
     Route::post('register', [RegisterController::class, 'register']);
 
 
 });
 
 
-
+        
 require __DIR__.'/auth.php';

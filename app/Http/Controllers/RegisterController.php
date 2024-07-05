@@ -40,8 +40,9 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
+        
         return Ouvrier::create([
-            'firstName' => $data['name'],
+            'firstName' => $data['firstName'],
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -50,11 +51,16 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
+    
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
         return view('ouvrier.auth.login');
 
+    }
+
+    public function profile(Request $request){
+        dd($request);
     }
 }
   
