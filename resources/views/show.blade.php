@@ -103,7 +103,7 @@
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">JOB PORTAL</a>
+            <a class="navbar-brand" href="/">JOB PORTAL</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -168,13 +168,16 @@
             </div>
         </div>
         <div class="row">
-            @foreach($job as $job)
+            @foreach($ouvrier as $ouvrier)
                 <div class="col-md-4 mb-4">
-                    <a href="{{ route('job.show', $job->id) }}">
+
                     <div class="card">
-                        <img src="{{ asset('images/' . $job->image) }}" alt="{{ $job->job }}" class="card-img-top">
+                        <img src="{{ asset('images/' . $ouvrier->image)}}"  class="card-img-top">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $job->job }}</h5>
+                           <h5 class="card-title"> Nom: {{ $ouvrier->name }}</h5>
+                           <h5 class="card-title">Phone:{{ $ouvrier->phone }}</h5>
+                           <h5 class="card-title">address:{{ $ouvrier->addres }}</h5>
+                           <h5 class="card-title">Region:{{ $ouvrier->region }}</h5>
                             <!-- Ajouter d'autres informations si nécessaire -->
                         </div>
                     </div>

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('ouvrier_id');
             $table->unsignedBigInteger('jod_id');
+            $table->string('image')->nullable();
             $table->string('addres')->nullable();
             $table->string('region')->nullable();
             $table->string('experience')->nullable();
